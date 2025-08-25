@@ -60,7 +60,7 @@ I'm developing "Pizza Ping," a network latency monitoring application with a pla
 
 **Questions for PRD Development**:
 
-1. **Product Vision & Strategy**: 
+1. **Product Vision & Strategy**:
    - What's the target audience? (Network administrators, developers, power users, general consumers?)
    - How does this differentiate from existing tools like speedtest.net or ping utilities?
    - What's the monetization strategy? (Free, freemium, one-time purchase, subscription?)
@@ -107,3 +107,61 @@ I'm developing "Pizza Ping," a network latency monitoring application with a pla
    - How do we handle the fact that users have limited control over their network performance compared to game skill?
 
 Please help me think through each of these areas systematically to create a comprehensive PRD that covers product strategy, user experience, technical requirements, go-to-market approach, and implementation roadmap. I'm particularly interested in creative approaches to the pizza theming and technical solutions for multi-platform deployment.
+
+## Questions
+
+1. Target Audience: Are you leaning toward network professionals/developers who need continuous monitoring, or more toward general consumers who want to gamify their network awareness? This affects UX complexity and feature prioritization.
+
+This is for me. Speedtest is full of ads and cruft. I want a quick app to answer the question "is my network running? Is it fast?". The "Pizza" bit is just a one-liner.
+
+2. Monetization: What's your gut feeling on pricing strategy? Given Pizza Pong's success, are you thinking premium one-time purchase, freemium with pro features, or something else?
+
+FLOSS for now.
+
+3. Platform Priority: If you had to ship one platform first, which would it be? This affects tech stack decisions (native Swift vs. cross-platform).
+
+I want to optimize for "build across platforms" and experimenting w/ architecture. I was thinking that this would be a rails turbo-native app. (Does that work for apple watch?)
+
+4. Ping Targets: Any thoughts on which public servers to use? ICANN root servers, Google DNS (8.8.8.8), Cloudflare (1.1.1.1), or a mix? Different servers could give different "delivery routes"
+in the pizza metaphor.
+
+Mix. It should be flexible, robust, decentralized.
+
+5. Background Processing: How aggressive should the monitoring be? Every 30 seconds, few minutes, or user-configurable? This impacts battery life vs. data freshness trade-offs.
+
+Not aggressive at all.
+
+6. Gamification Balance: How much gamification feels right? Should it be subtle (pizza-themed but professional) or playful (full delivery game mechanics with achievements)?
+
+"Gamification" is an opportunity, not an edict. I suspect there's room for some interesting iteration on the very utility-focused nature of this kind of thing. We should delve into HCD and JTBD. Why do we check network status? Which human need are we serving? "Wifi as the bottom of Maslow's pyramid" is funny, but where ACTUALLY does this sit on Maslow's pyramid? ALSO: we should TOTALLY use that maslows-pyramid-w-wifi meme. It's even pizza-slice-shaped!
+
+7. Data Visualization: How do you envision showing ping trends? Pizza slice pie charts, delivery truck routes, oven temperature meters?
+
+Don't overdo it. Pizza Pong is regular pong w/ a pizza emoji for the ball. A big part of the joke is how understated the whole thing is: we're calling it "Pizza Pong"...but it's functionally no different or better than regular pong.
+
+8. Cross-App Features: Should users be able to link accounts between apps? Share achievements? Or keep them separate but visually consistent?
+
+YAGNI.
+
+## Follow-up questions
+
+1. Apple Watch: Turbo Native doesn't directly support watchOS - you'd likely need a native Swift companion app that communicates with your Rails backend. Is that acceptable, or should we explore other cross-platform solutions?
+
+I think that's acceptable. I'm not aware of any good frameworks for the watch besides native swift.
+
+2. Background Monitoring: With "not aggressive at all" - are you thinking manual refresh only, or maybe ping when app opens + optional periodic checks?
+
+I think we default to 5m or 1m pings. I was in the car and network was slow and I was checking speedtest; if I could see a persistant chart of network-over-time (on the watch?), that'd be better. Maybe it's aware of me being in-motion and changes the cadance of the pings?
+
+
+3. JTBD Exploration: When you personally check network status, what triggers that? Is it "feels slow" → "is it me or them?", or proactive "working from coffee shop" checks, or something else?
+
+Mostly "feels slow, is there a problem?"
+
+4. "Is my network fast?" Definition: For your use case, what constitutes "fast"? Sub-50ms ping times? Or more about "can I video call without dropping"?
+
+The latter.
+
+5. Rails Backend: Even though you want to ping public servers, you'll still need some backend for the Rails app - just for serving the Turbo Native interface and maybe storing user preferences, right?
+
+I'd assumed "yes" although maybe there's a case for "this is a local client only". What do you think?
