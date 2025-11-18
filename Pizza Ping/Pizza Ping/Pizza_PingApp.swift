@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Pizza_PingApp: App {
+    @StateObject private var statusViewModel = StatusViewModel()
+
     var body: some Scene {
-        WindowGroup {
+        MenuBarExtra("Pizza Ping", systemImage: statusViewModel.menuBarIcon) {
             ContentView()
+                .environmentObject(statusViewModel)
         }
+        .menuBarExtraStyle(.window)
     }
 }
