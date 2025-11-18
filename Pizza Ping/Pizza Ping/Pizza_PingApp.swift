@@ -12,9 +12,16 @@ struct Pizza_PingApp: App {
     @StateObject private var statusViewModel = StatusViewModel()
 
     var body: some Scene {
-        MenuBarExtra("Pizza Ping", systemImage: statusViewModel.menuBarIcon) {
+        MenuBarExtra {
             ContentView()
                 .environmentObject(statusViewModel)
+        } label: {
+            HStack(spacing: 2) {
+                Text("🍕")
+                Circle()
+                    .fill(statusViewModel.statusColor)
+                    .frame(width: 8, height: 8)
+            }
         }
         .menuBarExtraStyle(.window)
     }

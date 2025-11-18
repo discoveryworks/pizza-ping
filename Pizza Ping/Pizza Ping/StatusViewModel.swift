@@ -40,6 +40,18 @@ class StatusViewModel: ObservableObject {
         }
     }
 
+    /// Status color for menu bar indicator
+    var statusColor: Color {
+        switch currentStatus {
+        case .excellent, .good:
+            return .green
+        case .slow:
+            return .yellow
+        case .poor:
+            return .red
+        }
+    }
+
     /// Formatted latency string
     var latencyString: String {
         guard let latency = currentLatency else {
