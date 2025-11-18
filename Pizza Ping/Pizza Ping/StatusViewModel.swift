@@ -53,6 +53,18 @@ class StatusViewModel: ObservableObject {
         }
     }
 
+    /// Status emoji for menu bar (colored circle)
+    var statusEmoji: String {
+        switch currentStatus {
+        case .excellent, .good:
+            return "🟢"
+        case .slow:
+            return "🟡"
+        case .poor:
+            return "🔴"
+        }
+    }
+
     /// Formatted latency string
     var latencyString: String {
         guard let latency = currentLatency else {

@@ -24,56 +24,29 @@ struct ContentView: View {
 
             Divider()
 
-            // Current Status
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Circle()
-                        .fill(statusColor)
-                        .frame(width: 12, height: 12)
-                    Text(viewModel.currentStatus.description)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                }
+            // Main Status
+            VStack(alignment: .leading, spacing: 8) {
+                // Status line with emoji indicator
+                Text("\(viewModel.statusEmoji) Network signal is \(viewModel.currentStatus.description.lowercased()). (\(viewModel.latencyString))")
+                    .font(.body)
 
-                Text(viewModel.latencyString)
-                    .font(.system(.body, design: .monospaced))
-                    .foregroundStyle(.secondary)
-
-                Text(viewModel.serverName)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
+                // Last checked line
                 if let lastPing = viewModel.lastPingTime {
-                    Text("Last check: \(lastPing, style: .relative) ago")
+                    Text("Last checked \(viewModel.serverName) \(lastPing, style: .relative) ago")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-            }
 
-            Divider()
-
-            // Statistics
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Statistics")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                if let avgLatency = viewModel.averageLatency {
-                    HStack {
-                        Text("Avg Latency:")
+                // Stats on one line
+                HStack(spacing: 16) {
+                    if let avgLatency = viewModel.averageLatency {
+                        Text("avg \(String(format: "%.0f", avgLatency * 1000))ms")
                             .font(.caption)
-                        Spacer()
-                        Text(String(format: "%.0f ms", avgLatency * 1000))
-                            .font(.system(.caption, design: .monospaced))
+                            .foregroundStyle(.secondary)
                     }
-                }
-
-                HStack {
-                    Text("Success Rate:")
+                    Text("\(String(format: "%.0f", viewModel.successRate * 100))% success")
                         .font(.caption)
-                    Spacer()
-                    Text(String(format: "%.0f%%", viewModel.successRate * 100))
-                        .font(.system(.caption, design: .monospaced))
+                        .foregroundStyle(.secondary)
                 }
             }
 
@@ -97,18 +70,7 @@ struct ContentView: View {
             }
         }
         .padding()
-        .frame(width: 250)
-    }
-
-    private var statusColor: Color {
-        switch viewModel.currentStatus {
-        case .excellent, .good:
-            return .green
-        case .slow:
-            return .yellow
-        case .poor:
-            return .red
-        }
+        .frame(width: 280)
     }
 }
 
