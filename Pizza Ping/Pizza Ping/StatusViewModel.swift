@@ -13,6 +13,7 @@ import SwiftUI
 class StatusViewModel: ObservableObject {
     @Published var currentStatus: NetworkStatus = .poor
     @Published var currentLatency: TimeInterval?
+    @Published var currentTarget: String = ""
     @Published var lastPingTime: Date?
     @Published var pingHistory: [PingResult] = []
     @Published var isPinging: Bool = false
@@ -60,6 +61,15 @@ class StatusViewModel: ObservableObject {
         return String(format: "%.0f ms", latency * 1000)
     }
 
+    /// Server name for display
+    var serverName: String {
+        // Try to match IP to known target
+        if let target = PingTarget.allCases.first(where: { $0.rawValue == currentTarget }) {
+            return target.name
+        }
+        return currentTarget.isEmpty ? "Unknown" : currentTarget
+    }
+
     /// Start periodic background pinging
     func startPeriodicPinging() {
         pingTimer?.invalidate()
@@ -83,6 +93,7 @@ class StatusViewModel: ObservableObject {
         let result = await PingEngine.pingMultipleTargets(Array(PingTarget.allCases))
 
         currentLatency = result.latency
+        currentTarget = result.target
         currentStatus = NetworkStatus(latency: result.latency)
         lastPingTime = result.timestamp
         pingHistory.append(result)

@@ -17,10 +17,9 @@ struct ContentView: View {
                 Text("🍕 Pizza Ping")
                     .font(.headline)
                 Spacer()
-                if viewModel.isPinging {
-                    ProgressView()
-                        .scaleEffect(0.7)
-                }
+                ProgressView()
+                    .scaleEffect(0.7)
+                    .opacity(viewModel.isPinging ? 1 : 0)
             }
 
             Divider()
@@ -38,6 +37,10 @@ struct ContentView: View {
 
                 Text(viewModel.latencyString)
                     .font(.system(.body, design: .monospaced))
+                    .foregroundStyle(.secondary)
+
+                Text(viewModel.serverName)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
 
                 if let lastPing = viewModel.lastPingTime {
