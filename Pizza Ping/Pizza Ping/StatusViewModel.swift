@@ -110,7 +110,10 @@ class StatusViewModel: ObservableObject {
         lastPingTime = result.timestamp
         pingHistory.append(result)
 
-        // Keep only last 100 results
+        // Log to history file
+        HistoryLogger.shared.log(result)
+
+        // Keep only last 100 results in memory
         if pingHistory.count > 100 {
             pingHistory.removeFirst(pingHistory.count - 100)
         }

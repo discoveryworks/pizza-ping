@@ -27,29 +27,31 @@ struct ContentView: View {
             // Recent Samples
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(viewModel.recentSamples) { sample in
-                    HStack(alignment: .top, spacing: 8) {
+                    HStack(spacing: 6) {
                         Text(statusEmoji(for: sample))
                             .font(.caption)
 
-                        VStack(alignment: .leading, spacing: 2) {
-                            HStack {
-                                Text(serverName(for: sample.target))
-                                    .font(.caption)
-                                    .fontWeight(.medium)
-                                Text("•")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                Text(sample.timestamp, style: .relative)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                        Text(serverName(for: sample.target))
+                            .font(.caption)
+                            .fontWeight(.medium)
 
-                            Text(sample.latency != nil ?
-                                 String(format: "%.0f ms", sample.latency! * 1000) :
-                                 "No connection")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
+                        Text("•")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Text(sample.timestamp, style: .relative)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Text("•")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Text(sample.latency != nil ?
+                             String(format: "%.0fms", sample.latency! * 1000) :
+                             "No connection")
+                            .font(.caption)
+                            .foregroundStyle(sample.latency != nil ? .primary : .red)
                     }
                 }
             }
@@ -66,6 +68,11 @@ struct ContentView: View {
                 .disabled(viewModel.isPinging)
 
                 Spacer()
+
+                Button("Show History") {
+                    HistoryLogger.shared.openHistoryFile()
+                }
+                .font(.caption)
 
                 Button("Quit") {
                     NSApplication.shared.terminate(nil)
