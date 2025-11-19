@@ -16,7 +16,7 @@ struct SampleRowView: View {
             // Column 1: Status emoji
             Text(statusEmoji)
                 .font(.system(.caption, design: .monospaced))
-                .frame(width: 12, alignment: .leading)
+                .frame(width: 16, alignment: .leading)
 
             // Column 2: Time
             Text(sample.timestamp, format: .dateTime.hour().minute())
