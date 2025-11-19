@@ -44,7 +44,7 @@ class HistoryLogger {
         guard let fileURL = historyFileURL else { return }
 
         if !fileManager.fileExists(atPath: fileURL.path) {
-            let header = "timestamp,server,latency_ms,status\n"
+            let header = "timestamp,server_name,server_ip,latency_ms,status\n"
             try? header.write(to: fileURL, atomically: true, encoding: .utf8)
         }
     }
@@ -57,7 +57,15 @@ class HistoryLogger {
         let latencyMs = result.latency != nil ? String(format: "%.0f", result.latency! * 1000) : "failed"
         let timestamp = ISO8601DateFormatter().string(from: result.timestamp)
 
-        let line = "\(timestamp),\(result.target),\(latencyMs),\(status.description)\n"
+        // Get friendly server name
+        let serverName: String
+        if let target = PingTarget.allCases.first(where: { $0.rawValue == result.target }) {
+            serverName = target.name
+        } else {
+            serverName = result.target
+        }
+
+        let line = "\(timestamp),\(serverName),\(result.target),\(latencyMs),\(status.description)\n"
 
         // Append to file
         if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
