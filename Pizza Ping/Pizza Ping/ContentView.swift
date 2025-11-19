@@ -24,29 +24,33 @@ struct ContentView: View {
 
             Divider()
 
-            // Main Status
-            VStack(alignment: .leading, spacing: 8) {
-                // Status line with emoji indicator
-                Text("\(viewModel.statusEmoji) Network signal is \(viewModel.currentStatus.description.lowercased()). (\(viewModel.latencyString))")
-                    .font(.body)
-
-                // Last checked line
-                if let lastPing = viewModel.lastPingTime {
-                    Text("Last checked \(viewModel.serverName) \(lastPing, style: .relative) ago")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                // Stats on one line
-                HStack(spacing: 16) {
-                    if let avgLatency = viewModel.averageLatency {
-                        Text("avg \(String(format: "%.0f", avgLatency * 1000))ms")
+            // Recent Samples
+            VStack(alignment: .leading, spacing: 6) {
+                ForEach(viewModel.recentSamples) { sample in
+                    HStack(alignment: .top, spacing: 8) {
+                        Text(statusEmoji(for: sample))
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack {
+                                Text(serverName(for: sample.target))
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                                Text("•")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                Text(sample.timestamp, style: .relative)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Text(sample.latency != nil ?
+                                 String(format: "%.0f ms", sample.latency! * 1000) :
+                                 "No connection")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
                     }
-                    Text("\(String(format: "%.0f", viewModel.successRate * 100))% success")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
                 }
             }
 
@@ -71,6 +75,25 @@ struct ContentView: View {
         }
         .padding()
         .frame(width: 280)
+    }
+
+    private func statusEmoji(for sample: PingResult) -> String {
+        let status = NetworkStatus(latency: sample.latency)
+        switch status {
+        case .excellent, .good:
+            return "🟢"
+        case .slow:
+            return "🟡"
+        case .poor:
+            return "🔴"
+        }
+    }
+
+    private func serverName(for target: String) -> String {
+        if let pingTarget = PingTarget.allCases.first(where: { $0.rawValue == target }) {
+            return pingTarget.name
+        }
+        return target
     }
 }
 

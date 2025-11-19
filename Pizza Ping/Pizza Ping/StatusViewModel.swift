@@ -136,4 +136,9 @@ class StatusViewModel: ObservableObject {
         let successCount = recentResults.filter { $0.isSuccess }.count
         return Double(successCount) / Double(recentResults.count)
     }
+
+    /// Most recent 3 samples for display
+    var recentSamples: [PingResult] {
+        Array(pingHistory.suffix(3).reversed())
+    }
 }
