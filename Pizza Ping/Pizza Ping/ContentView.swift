@@ -26,7 +26,7 @@ struct ContentView: View {
 
             // Recent Samples
             VStack(alignment: .leading, spacing: 6) {
-                ForEach(viewModel.recentSamples) { sample in
+                ForEach(viewModel.recentSamples, id: \.id) { sample in
                     HStack(spacing: 6) {
                         Text(statusEmoji(for: sample))
                             .font(.caption)

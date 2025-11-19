@@ -28,12 +28,20 @@ class PingEngine {
                 using: .tcp
             )
 
+            // Use NSLock for thread-safe access
+            let lock = NSLock()
             var hasReturned = false
 
             // Set up timeout
             DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
-                if !hasReturned {
+                lock.lock()
+                let shouldReturn = !hasReturned
+                if shouldReturn {
                     hasReturned = true
+                }
+                lock.unlock()
+
+                if shouldReturn {
                     connection.cancel()
                     continuation.resume(returning: nil)
                 }
@@ -42,15 +50,27 @@ class PingEngine {
             connection.stateUpdateHandler = { state in
                 switch state {
                 case .ready:
-                    if !hasReturned {
+                    lock.lock()
+                    let shouldReturn = !hasReturned
+                    if shouldReturn {
                         hasReturned = true
+                    }
+                    lock.unlock()
+
+                    if shouldReturn {
                         let latency = Date().timeIntervalSince(start)
                         connection.cancel()
                         continuation.resume(returning: latency)
                     }
                 case .failed:
-                    if !hasReturned {
+                    lock.lock()
+                    let shouldReturn = !hasReturned
+                    if shouldReturn {
                         hasReturned = true
+                    }
+                    lock.unlock()
+
+                    if shouldReturn {
                         connection.cancel()
                         continuation.resume(returning: nil)
                     }
