@@ -28,6 +28,10 @@ class NetworkInfo {
         // Request permission if not done yet
         requestLocationPermission()
 
+        // Check location authorization status
+        let status = locationManager.authorizationStatus
+        print("DEBUG: Location authorization status: \(status.rawValue)")
+
         // Use CoreWLAN on macOS
         let client = CWWiFiClient.shared()
 
@@ -36,8 +40,13 @@ class NetworkInfo {
             return nil
         }
 
+        print("DEBUG: Interface name: \(interface.interfaceName ?? "unknown")")
+        print("DEBUG: Power on: \(interface.powerOn())")
+
         guard let ssid = interface.ssid() else {
-            print("DEBUG: interface.ssid() returned nil - likely needs location permission")
+            print("DEBUG: interface.ssid() returned nil")
+            print("DEBUG: Location auth status: \(status.rawValue)")
+            print("DEBUG: If status is not 'authorized', go to System Settings → Privacy & Security → Location Services")
             return nil
         }
 
