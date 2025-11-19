@@ -14,10 +14,7 @@ class NetworkInfo {
     /// Get the current WiFi network name (SSID)
     static func getCurrentSSID() -> String? {
         // Use CoreWLAN on macOS
-        guard let client = CWWiFiClient.shared() else {
-            print("DEBUG: CWWiFiClient.shared() returned nil")
-            return nil
-        }
+        let client = CWWiFiClient.shared()
 
         guard let interface = client.interface() else {
             print("DEBUG: client.interface() returned nil")
