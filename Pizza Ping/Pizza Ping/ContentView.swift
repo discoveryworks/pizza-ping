@@ -28,6 +28,7 @@ struct SampleRowView: View {
                     .font(.system(.caption, design: .monospaced))
                     .foregroundStyle(sample.latency != nil ? .primary : Color.red)
             }
+            .frame(width: 120, alignment: .leading)
 
             Spacer()
 
@@ -37,6 +38,8 @@ struct SampleRowView: View {
                     Text(networkName)
                         .font(.system(.caption, design: .monospaced))
                         .fontWeight(.semibold)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                     Text("→")
                         .font(.system(.caption, design: .monospaced))
                         .foregroundStyle(.secondary)
@@ -46,6 +49,7 @@ struct SampleRowView: View {
                     .font(.system(.caption, design: .monospaced))
                     .foregroundStyle(.secondary)
             }
+            .frame(maxWidth: 150, alignment: .trailing)
         }
     }
 
