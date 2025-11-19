@@ -7,6 +7,59 @@
 
 import SwiftUI
 
+// Helper view for displaying a single sample row
+struct SampleRowView: View {
+    let sample: PingResult
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Text(statusEmoji)
+                .font(.caption)
+
+            Text(serverName)
+                .font(.caption)
+                .fontWeight(.medium)
+
+            Text("•")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Text(sample.timestamp, style: .relative)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Text("•")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Text(sample.latency != nil ?
+                 String(format: "%.0fms", sample.latency! * 1000) :
+                 "No connection")
+                .font(.caption)
+                .foregroundStyle(sample.latency != nil ? .primary : .red)
+        }
+    }
+
+    private var statusEmoji: String {
+        let status = NetworkStatus(latency: sample.latency)
+        switch status {
+        case .excellent, .good:
+            return "🟢"
+        case .slow:
+            return "🟡"
+        case .poor:
+            return "🔴"
+        }
+    }
+
+    private var serverName: String {
+        if let pingTarget = PingTarget.allCases.first(where: { $0.rawValue == sample.target }) {
+            return pingTarget.name
+        }
+        return sample.target
+    }
+}
+
 struct ContentView: View {
     @EnvironmentObject var viewModel: StatusViewModel
 
@@ -26,33 +79,8 @@ struct ContentView: View {
 
             // Recent Samples
             VStack(alignment: .leading, spacing: 6) {
-                ForEach(Array(viewModel.recentSamples)) { sample in
-                    HStack(spacing: 6) {
-                        Text(statusEmoji(for: sample))
-                            .font(.caption)
-
-                        Text(serverName(for: sample.target))
-                            .font(.caption)
-                            .fontWeight(.medium)
-
-                        Text("•")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        Text(sample.timestamp, style: .relative)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        Text("•")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        Text(sample.latency != nil ?
-                             String(format: "%.0fms", sample.latency! * 1000) :
-                             "No connection")
-                            .font(.caption)
-                            .foregroundStyle(sample.latency != nil ? .primary : .red)
-                    }
+                ForEach(viewModel.pingHistory.suffix(3).reversed()) { sample in
+                    SampleRowView(sample: sample)
                 }
             }
 
@@ -82,25 +110,6 @@ struct ContentView: View {
         }
         .padding()
         .frame(width: 280)
-    }
-
-    private func statusEmoji(for sample: PingResult) -> String {
-        let status = NetworkStatus(latency: sample.latency)
-        switch status {
-        case .excellent, .good:
-            return "🟢"
-        case .slow:
-            return "🟡"
-        case .poor:
-            return "🔴"
-        }
-    }
-
-    private func serverName(for target: String) -> String {
-        if let pingTarget = PingTarget.allCases.first(where: { $0.rawValue == target }) {
-            return pingTarget.name
-        }
-        return target
     }
 }
 
