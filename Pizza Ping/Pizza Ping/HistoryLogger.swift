@@ -44,7 +44,7 @@ class HistoryLogger {
         guard let fileURL = historyFileURL else { return }
 
         if !fileManager.fileExists(atPath: fileURL.path) {
-            let header = "timestamp,server_name,server_ip,latency_ms,status\n"
+            let header = "timestamp,network_name,server_name,server_ip,latency_ms,status\n"
             try? header.write(to: fileURL, atomically: true, encoding: .utf8)
         }
     }
@@ -65,7 +65,10 @@ class HistoryLogger {
             serverName = result.target
         }
 
-        let line = "\(timestamp),\(serverName),\(result.target),\(latencyMs),\(status.description)\n"
+        // Get network name or use "Unknown"
+        let networkName = result.networkName ?? "Unknown"
+
+        let line = "\(timestamp),\(networkName),\(serverName),\(result.target),\(latencyMs),\(status.description)\n"
 
         // Append to file
         if let fileHandle = try? FileHandle(forWritingTo: fileURL) {

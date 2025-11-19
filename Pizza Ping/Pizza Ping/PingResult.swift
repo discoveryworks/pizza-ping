@@ -13,12 +13,14 @@ struct PingResult: Identifiable, Codable {
     let timestamp: Date
     let latency: TimeInterval? // nil if ping failed
     let target: String
+    let networkName: String? // WiFi network name (SSID)
 
-    init(target: String, latency: TimeInterval?) {
+    init(target: String, latency: TimeInterval?, networkName: String? = nil) {
         self.id = UUID()
         self.timestamp = Date()
         self.target = target
         self.latency = latency
+        self.networkName = networkName
     }
 
     var isSuccess: Bool {

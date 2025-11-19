@@ -16,6 +16,16 @@ struct SampleRowView: View {
             Text(statusEmoji)
                 .font(.caption)
 
+            if let networkName = sample.networkName {
+                Text(networkName)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+
+                Text("•")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Text(serverName)
                 .font(.caption)
                 .fontWeight(.medium)

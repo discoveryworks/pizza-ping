@@ -109,11 +109,14 @@ class PingEngine {
             return (target.rawValue, latency)
         }
 
+        // Get current network name
+        let networkName = NetworkInfo.getCurrentSSID()
+
         if let fastest = successful.min(by: { $0.1 < $1.1 }) {
-            return PingResult(target: fastest.0, latency: fastest.1)
+            return PingResult(target: fastest.0, latency: fastest.1, networkName: networkName)
         } else {
             // All pings failed
-            return PingResult(target: targets.first?.rawValue ?? "unknown", latency: nil)
+            return PingResult(target: targets.first?.rawValue ?? "unknown", latency: nil, networkName: networkName)
         }
     }
 }
