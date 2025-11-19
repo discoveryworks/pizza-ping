@@ -12,45 +12,57 @@ struct SampleRowView: View {
     let sample: PingResult
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Left side: status, time, latency
-            HStack(spacing: 6) {
-                Text(statusEmoji)
-                    .font(.system(.caption, design: .monospaced))
+        HStack(spacing: 6) {
+            // Column 1: Status emoji
+            Text(statusEmoji)
+                .font(.system(.caption, design: .monospaced))
+                .frame(width: 15, alignment: .leading)
 
-                Text(sample.timestamp, format: .dateTime.hour().minute())
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundStyle(.secondary)
+            // Column 2: Time
+            Text(sample.timestamp, format: .dateTime.hour().minute())
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.secondary)
+                .frame(width: 60, alignment: .leading)
 
-                Text(sample.latency != nil ?
-                     String(format: "%3.0fms", sample.latency! * 1000) :
-                     " --ms")
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundStyle(sample.latency != nil ? .primary : Color.red)
-            }
-            .frame(width: 120, alignment: .leading)
+            // Column 3: Latency
+            Text(sample.latency != nil ?
+                 String(format: "%3.0fms", sample.latency! * 1000) :
+                 " --ms")
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(sample.latency != nil ? .primary : Color.red)
+                .frame(width: 40, alignment: .trailing)
 
-            Spacer()
+            // Column 4: Server (fixed width for alignment)
+            Text(serverName)
+                .font(.system(.caption, design: .monospaced))
+                .fontWeight(.medium)
+                .frame(width: 80, alignment: .leading)
 
-            // Right side: network name and server
+            // Column 5: Arrow + Network name
             HStack(spacing: 4) {
-                if let networkName = sample.networkName {
-                    Text(networkName)
-                        .font(.system(.caption, design: .monospaced))
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                    Text("→")
-                        .font(.system(.caption, design: .monospaced))
-                        .foregroundStyle(.secondary)
-                }
-
-                Text(serverName)
+                Text("→")
                     .font(.system(.caption, design: .monospaced))
                     .foregroundStyle(.secondary)
+
+                Text(truncatedNetworkName)
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
-            .frame(maxWidth: 150, alignment: .trailing)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private var truncatedNetworkName: String {
+        guard let networkName = sample.networkName else { return "" }
+
+        // Smart truncation: [first 8]…[last 4] for names > 15 chars
+        if networkName.count > 15 {
+            let start = networkName.prefix(8)
+            let end = networkName.suffix(4)
+            return "\(start)…\(end)"
+        }
+        return networkName
     }
 
     private var statusEmoji: String {
