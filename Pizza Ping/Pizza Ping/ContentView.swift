@@ -12,41 +12,40 @@ struct SampleRowView: View {
     let sample: PingResult
 
     var body: some View {
-        HStack(spacing: 6) {
-            Text(statusEmoji)
-                .font(.caption)
+        HStack(spacing: 0) {
+            // Left side: status, time, latency
+            HStack(spacing: 6) {
+                Text(statusEmoji)
+                    .font(.system(.caption, design: .monospaced))
 
-            if let networkName = sample.networkName {
-                Text(networkName)
-                    .font(.caption)
-                    .fontWeight(.semibold)
-
-                Text("•")
-                    .font(.caption)
+                Text(sample.timestamp, format: .dateTime.hour().minute())
+                    .font(.system(.caption, design: .monospaced))
                     .foregroundStyle(.secondary)
+
+                Text(sample.latency != nil ?
+                     String(format: "%3.0fms", sample.latency! * 1000) :
+                     " --ms")
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundStyle(sample.latency != nil ? .primary : Color.red)
             }
 
-            Text(serverName)
-                .font(.caption)
-                .fontWeight(.medium)
+            Spacer()
 
-            Text("•")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            // Right side: network name and server
+            HStack(spacing: 4) {
+                if let networkName = sample.networkName {
+                    Text(networkName)
+                        .font(.system(.caption, design: .monospaced))
+                        .fontWeight(.semibold)
+                    Text("→")
+                        .font(.system(.caption, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                }
 
-            Text(sample.timestamp, format: .dateTime.hour().minute())
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            Text("•")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            Text(sample.latency != nil ?
-                 String(format: "%.0fms", sample.latency! * 1000) :
-                 "No connection")
-                .font(.caption)
-                .foregroundStyle(sample.latency != nil ? .primary : Color.red)
+                Text(serverName)
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 
