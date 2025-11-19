@@ -36,7 +36,7 @@ struct SampleRowView: View {
                  String(format: "%.0fms", sample.latency! * 1000) :
                  "No connection")
                 .font(.caption)
-                .foregroundStyle(sample.latency != nil ? .primary : .red)
+                .foregroundStyle(sample.latency != nil ? .primary : Color.red)
         }
     }
 
