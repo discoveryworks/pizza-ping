@@ -12,17 +12,17 @@ struct SampleRowView: View {
     let sample: PingResult
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 4) {
             // Column 1: Status emoji
             Text(statusEmoji)
                 .font(.system(.caption, design: .monospaced))
-                .frame(width: 15, alignment: .leading)
+                .frame(width: 12, alignment: .leading)
 
             // Column 2: Time
             Text(sample.timestamp, format: .dateTime.hour().minute())
                 .font(.system(.caption, design: .monospaced))
                 .foregroundStyle(.secondary)
-                .frame(width: 60, alignment: .leading)
+                .frame(width: 52, alignment: .leading)
 
             // Column 3: Latency
             Text(sample.latency != nil ?
@@ -30,36 +30,35 @@ struct SampleRowView: View {
                  " --ms")
                 .font(.system(.caption, design: .monospaced))
                 .foregroundStyle(sample.latency != nil ? .primary : Color.red)
-                .frame(width: 40, alignment: .trailing)
+                .frame(width: 38, alignment: .trailing)
 
             // Column 4: Server (fixed width for alignment)
             Text(serverName)
                 .font(.system(.caption, design: .monospaced))
                 .fontWeight(.medium)
-                .frame(width: 80, alignment: .leading)
+                .frame(width: 70, alignment: .leading)
 
-            // Column 5: Arrow + Network name
-            HStack(spacing: 4) {
-                Text("→")
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundStyle(.secondary)
+            // Column 5: Arrow
+            Text("→")
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.secondary)
 
-                Text(truncatedNetworkName)
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            // Column 6: Network name (flexible)
+            Text(truncatedNetworkName)
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
     private var truncatedNetworkName: String {
         guard let networkName = sample.networkName else { return "" }
 
-        // Smart truncation: [first 8]…[last 4] for names > 15 chars
-        if networkName.count > 15 {
-            let start = networkName.prefix(8)
-            let end = networkName.suffix(4)
+        // Smart truncation: [first 8]…[last 4] for names > 12 chars
+        if networkName.count > 12 {
+            let start = String(networkName.prefix(8))
+            let end = String(networkName.suffix(4))
             return "\(start)…\(end)"
         }
         return networkName
