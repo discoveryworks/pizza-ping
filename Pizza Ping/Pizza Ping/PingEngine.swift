@@ -83,6 +83,15 @@ class PingEngine {
         }
     }
 
+    /// Pings a single target and returns the result
+    /// - Parameter target: Target to ping
+    /// - Returns: Ping result with network name
+    static func pingSingleTarget(_ target: PingTarget) async -> PingResult {
+        let latency = await ping(host: target.rawValue)
+        let networkName = NetworkInfo.getCurrentSSID()
+        return PingResult(target: target.rawValue, latency: latency, networkName: networkName)
+    }
+
     /// Pings multiple targets and returns the best result
     /// - Parameter targets: Array of targets to ping
     /// - Returns: The fastest successful ping result, or failed result if all fail

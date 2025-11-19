@@ -20,6 +20,7 @@ class StatusViewModel: ObservableObject {
 
     private var pingTimer: Timer?
     private let pingInterval: TimeInterval = 300 // 5 minutes default
+    private var currentTargetIndex: Int = 0
 
     init() {
         // Start monitoring on init
@@ -62,6 +63,8 @@ class StatusViewModel: ObservableObject {
             return "🟡"
         case .poor:
             return "🔴"
+        case .disconnected:
+            return "🚫"
         }
     }
 
@@ -102,7 +105,12 @@ class StatusViewModel: ObservableObject {
     func performPing() async {
         isPinging = true
 
-        let result = await PingEngine.pingMultipleTargets(Array(PingTarget.allCases))
+        // Rotate through targets instead of pinging all
+        let targets = Array(PingTarget.allCases)
+        let targetToPing = targets[currentTargetIndex % targets.count]
+        currentTargetIndex += 1
+
+        let result = await PingEngine.pingSingleTarget(targetToPing)
 
         currentLatency = result.latency
         currentTarget = result.target

@@ -58,6 +58,8 @@ struct SampleRowView: View {
             return "🟡"
         case .poor:
             return "🔴"
+        case .disconnected:
+            return "🚫"
         }
     }
 

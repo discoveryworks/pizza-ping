@@ -30,14 +30,15 @@ struct PingResult: Identifiable, Codable {
 
 /// Network status based on ping results
 enum NetworkStatus {
-    case excellent  // < 50ms
-    case good       // 50-150ms
-    case slow       // 150-300ms
-    case poor       // > 300ms or failed
+    case excellent     // < 50ms
+    case good          // 50-150ms
+    case slow          // 150-300ms
+    case poor          // > 300ms
+    case disconnected  // Failed/no connection
 
     init(latency: TimeInterval?) {
         guard let latency = latency else {
-            self = .poor
+            self = .disconnected
             return
         }
 
@@ -59,6 +60,7 @@ enum NetworkStatus {
         case .good: return "green"
         case .slow: return "yellow"
         case .poor: return "red"
+        case .disconnected: return "none"
         }
     }
 
@@ -68,6 +70,7 @@ enum NetworkStatus {
         case .good: return "Good"
         case .slow: return "Slow"
         case .poor: return "Poor"
+        case .disconnected: return "Disconnected"
         }
     }
 }
