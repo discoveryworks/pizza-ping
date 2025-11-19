@@ -39,6 +39,8 @@ class StatusViewModel: ObservableObject {
             return "wifi.exclamationmark"
         case .poor:
             return "wifi.slash"
+        case .disconnected:
+            return "wifi.slash"
         }
     }
 
@@ -50,6 +52,8 @@ class StatusViewModel: ObservableObject {
         case .slow:
             return .yellow
         case .poor:
+            return .red
+        case .disconnected:
             return .red
         }
     }
