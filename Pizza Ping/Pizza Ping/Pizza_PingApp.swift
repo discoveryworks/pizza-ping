@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct Pizza_PingApp: App {
+    @StateObject private var statusViewModel = StatusViewModel()
+
+    // Toggle between dot and pepperoni styles
+    private let usePepperoniStyle = false
+
     var body: some Scene {
-        WindowGroup {
+        MenuBarExtra {
             ContentView()
+                .environmentObject(statusViewModel)
+        } label: {
+            Text("🍕\(statusViewModel.statusEmoji)")
         }
+        .menuBarExtraStyle(.window)
     }
 }

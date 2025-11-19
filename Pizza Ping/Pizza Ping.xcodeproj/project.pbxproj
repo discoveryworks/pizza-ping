@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ECF9BCEC2ECE06CA00837370 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */; };
+		ECF9BD242ECE4B2300837370 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EC250B812ECD286800EC1B0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +32,34 @@
 		EC250B6F2ECD286600EC1B0D /* Pizza Ping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Ping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC250B802ECD286800EC1B0D /* Pizza PingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pizza PingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC250B8A2ECD286800EC1B0D /* Pizza PingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pizza PingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
+		ECF9BD292ECE4B2300837370 /* Pizza Ping Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Ping Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ECF9BD2A2ECE4B2400837370 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Lite" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				ContentView.swift,
+				HistoryLogger.swift,
+				NetworkInfo.swift,
+				PingEngine.swift,
+				PingResult.swift,
+				Pizza_PingApp.swift,
+				"Preview Content/Preview Assets.xcassets",
+				StatusViewModel.swift,
+			);
+			target = ECF9BD212ECE4B2300837370 /* Pizza Ping Lite */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EC250B712ECD286600EC1B0D /* Pizza Ping */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ECF9BD2A2ECE4B2400837370 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Lite" target */,
+			);
 			path = "Pizza Ping";
 			sourceTree = "<group>";
 		};
@@ -52,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF9BCEC2ECE06CA00837370 /* CoreWLAN.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +98,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECF9BD232ECE4B2300837370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECF9BD242ECE4B2300837370 /* CoreWLAN.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +115,7 @@
 				EC250B712ECD286600EC1B0D /* Pizza Ping */,
 				EC250B832ECD286800EC1B0D /* Pizza PingTests */,
 				EC250B8D2ECD286800EC1B0D /* Pizza PingUITests */,
+				ECF9BCEA2ECE06CA00837370 /* Frameworks */,
 				EC250B702ECD286600EC1B0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +126,17 @@
 				EC250B6F2ECD286600EC1B0D /* Pizza Ping.app */,
 				EC250B802ECD286800EC1B0D /* Pizza PingTests.xctest */,
 				EC250B8A2ECD286800EC1B0D /* Pizza PingUITests.xctest */,
+				ECF9BD292ECE4B2300837370 /* Pizza Ping Lite.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ECF9BCEA2ECE06CA00837370 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +210,28 @@
 			productReference = EC250B8A2ECD286800EC1B0D /* Pizza PingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		ECF9BD212ECE4B2300837370 /* Pizza Ping Lite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECF9BD262ECE4B2300837370 /* Build configuration list for PBXNativeTarget "Pizza Ping Lite" */;
+			buildPhases = (
+				ECF9BD222ECE4B2300837370 /* Sources */,
+				ECF9BD232ECE4B2300837370 /* Frameworks */,
+				ECF9BD252ECE4B2300837370 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EC250B712ECD286600EC1B0D /* Pizza Ping */,
+			);
+			name = "Pizza Ping Lite";
+			packageProductDependencies = (
+			);
+			productName = "Pizza Ping";
+			productReference = ECF9BD292ECE4B2300837370 /* Pizza Ping Lite.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,6 +272,7 @@
 				EC250B6E2ECD286600EC1B0D /* Pizza Ping */,
 				EC250B7F2ECD286800EC1B0D /* Pizza PingTests */,
 				EC250B892ECD286800EC1B0D /* Pizza PingUITests */,
+				ECF9BD212ECE4B2300837370 /* Pizza Ping Lite */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +299,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECF9BD252ECE4B2300837370 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -247,6 +324,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC250B862ECD286800EC1B0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECF9BD222ECE4B2300837370 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -392,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping_Full.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -401,12 +485,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Pizza Ping needs your location to display your WiFi network name.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -419,7 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping_Full.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -428,12 +514,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Pizza Ping needs your location to display your WiFi network name.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -450,7 +538,7 @@
 				DEVELOPMENT_TEAM = R9W29S78JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-PingTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -468,7 +556,7 @@
 				DEVELOPMENT_TEAM = R9W29S78JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-PingTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -484,7 +572,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R9W29S78JH;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-PingUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -500,12 +588,70 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R9W29S78JH;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-PingUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Pizza Ping";
+			};
+			name = Release;
+		};
+		ECF9BD272ECE4B2300837370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Pizza Ping/Preview Content\"";
+				DEVELOPMENT_TEAM = R9W29S78JH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Pizza Ping needs your location to display your WiFi network name.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping-Lite";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		ECF9BD282ECE4B2300837370 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Pizza Ping/Pizza_Ping.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Pizza Ping/Preview Content\"";
+				DEVELOPMENT_TEAM = R9W29S78JH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Pizza Ping needs your location to display your WiFi network name.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping-Lite";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -544,6 +690,15 @@
 			buildConfigurations = (
 				EC250B9B2ECD286800EC1B0D /* Debug */,
 				EC250B9C2ECD286800EC1B0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECF9BD262ECE4B2300837370 /* Build configuration list for PBXNativeTarget "Pizza Ping Lite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECF9BD272ECE4B2300837370 /* Debug */,
+				ECF9BD282ECE4B2300837370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
