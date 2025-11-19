@@ -8,11 +8,26 @@
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import CoreWLAN
+import CoreLocation
 
 /// Helper to get current network information
 class NetworkInfo {
+    private static let locationManager = CLLocationManager()
+    private static var hasRequestedPermission = false
+
+    /// Request location permission (needed for WiFi SSID on macOS)
+    static func requestLocationPermission() {
+        if !hasRequestedPermission {
+            hasRequestedPermission = true
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+
     /// Get the current WiFi network name (SSID)
     static func getCurrentSSID() -> String? {
+        // Request permission if not done yet
+        requestLocationPermission()
+
         // Use CoreWLAN on macOS
         let client = CWWiFiClient.shared()
 
@@ -22,7 +37,7 @@ class NetworkInfo {
         }
 
         guard let ssid = interface.ssid() else {
-            print("DEBUG: interface.ssid() returned nil")
+            print("DEBUG: interface.ssid() returned nil - likely needs location permission")
             return nil
         }
 
