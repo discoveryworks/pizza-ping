@@ -83,9 +83,9 @@ enum PingTarget: String, CaseIterable {
 
     var name: String {
         switch self {
-        case .cloudflare: return "Cloudflare DNS"
-        case .google: return "Google DNS"
-        case .quad9: return "Quad9 DNS"
+        case .cloudflare: return "Cloudflare"
+        case .google: return "Google"
+        case .quad9: return "Quad9"
         }
     }
 }
