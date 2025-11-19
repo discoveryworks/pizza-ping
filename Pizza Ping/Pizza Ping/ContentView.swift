@@ -34,7 +34,7 @@ struct SampleRowView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
-            Text(sample.timestamp, style: .relative)
+            Text(sample.timestamp, format: .dateTime.hour().minute())
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
