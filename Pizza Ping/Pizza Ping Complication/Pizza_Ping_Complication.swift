@@ -9,52 +9,62 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+    func placeholder(in context: Context) -> PingEntry {
+        PingEntry(date: Date(), status: .excellent, latency: 15)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+    func getSnapshot(in context: Context, completion: @escaping (PingEntry) -> ()) {
+        let entry = PingEntry(date: Date(), status: .excellent, latency: 15)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        // Get current ping status from app group shared data
+        let status = SharedPingData.currentStatus
+        let latency = SharedPingData.currentLatency
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-            entries.append(entry)
-        }
+        // Create entry for current status
+        let entry = PingEntry(
+            date: Date(),
+            status: status,
+            latency: latency
+        )
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        // Update every 5 minutes
+        let nextUpdate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())!
+        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
         completion(timeline)
     }
-
-//    func relevances() async -> WidgetRelevances<Void> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct PingEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let status: NetworkStatus
+    let latency: TimeInterval?
 }
 
 struct Pizza_Ping_ComplicationEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            HStack {
-                Text("Time:")
-                Text(entry.date, style: .time)
+        HStack(spacing: 2) {
+            Text("🍕")
+                .font(.system(size: 16))
+            Text(statusEmoji)
+                .font(.system(size: 16))
+            if let latency = entry.latency {
+                Text(String(format: "%.0fms", latency * 1000))
+                    .font(.system(size: 12, design: .monospaced))
             }
+        }
+    }
 
-            Text("Emoji:")
-            Text(entry.emoji)
+    private var statusEmoji: String {
+        switch entry.status {
+        case .excellent, .good: return "🟢"
+        case .slow: return "🟡"
+        case .poor: return "🔴"
+        case .disconnected: return "🚫"
         }
     }
 }
@@ -73,14 +83,16 @@ struct Pizza_Ping_Complication: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Pizza Ping")
+        .description("Network latency status")
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
 
 #Preview(as: .accessoryRectangular) {
     Pizza_Ping_Complication()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    PingEntry(date: .now, status: .excellent, latency: 0.015)
+    PingEntry(date: .now, status: .slow, latency: 0.180)
+    PingEntry(date: .now, status: .poor, latency: 0.350)
 }

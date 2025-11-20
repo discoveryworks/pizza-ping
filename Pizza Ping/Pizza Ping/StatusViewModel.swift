@@ -128,6 +128,11 @@ class StatusViewModel: ObservableObject {
         lastPingTime = result.timestamp
         pingHistory.append(result)
 
+        // Save to shared storage for widget
+        #if os(watchOS)
+        SharedPingData.save(status: currentStatus, latency: currentLatency)
+        #endif
+
         // Log to history file (macOS only)
         #if os(macOS)
         HistoryLogger.shared.log(result)
