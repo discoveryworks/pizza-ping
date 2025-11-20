@@ -73,20 +73,23 @@ class NetworkInfo {
 
     #if os(iOS) || os(watchOS)
     private static func getiOSWatchOSSSID() -> String? {
-        // Use NEHotspotNetwork for iOS/watchOS
-        guard let interfaces = CNCopySupportedInterfaces() as? [String],
-              let interface = interfaces.first else {
-            print("DEBUG: No WiFi interfaces found")
-            return nil
+        // Use NEHotspotNetwork for iOS 14+ / watchOS 7+
+        var ssid: String?
+        let semaphore = DispatchSemaphore(value: 0)
+
+        NEHotspotNetwork.fetchCurrent { network in
+            ssid = network?.ssid
+            semaphore.signal()
         }
 
-        guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any],
-              let ssid = info[kCNNetworkInfoKeySSID as String] as? String else {
-            print("DEBUG: Could not get SSID from interface")
-            return nil
+        _ = semaphore.wait(timeout: .now() + 2.0)
+
+        if let ssid = ssid {
+            print("DEBUG: Successfully got SSID: \(ssid)")
+        } else {
+            print("DEBUG: Could not get SSID - may need location permission or WiFi info entitlement")
         }
 
-        print("DEBUG: Successfully got SSID: \(ssid)")
         return ssid
     }
     #endif

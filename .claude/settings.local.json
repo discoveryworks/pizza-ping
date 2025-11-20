@@ -5,7 +5,10 @@
       "WebSearch",
       "WebSearch",
       "WebFetch(domain:apps.apple.com)",
-      "Bash(gh release:*)"
+      "Bash(gh release:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(gh repo view:*)"
     ],
     "deny": [],
     "ask": []

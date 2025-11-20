@@ -97,6 +97,7 @@
 		ECB4B32A2ECF56B900E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				NetworkInfo.swift,
 				PingEngine.swift,
 				PingResult.swift,
 				StatusViewModel.swift,
@@ -106,6 +107,7 @@
 		ECB4B32B2ECF56B900E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Watch Watch App" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				NetworkInfo.swift,
 				PingEngine.swift,
 				PingResult.swift,
 				StatusViewModel.swift,
@@ -118,7 +120,6 @@
 				Assets.xcassets,
 				ContentView.swift,
 				HistoryLogger.swift,
-				NetworkInfo.swift,
 				Pizza_PingApp.swift,
 				"Preview Content/Preview Assets.xcassets",
 			);
