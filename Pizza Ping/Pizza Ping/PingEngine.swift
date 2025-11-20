@@ -88,7 +88,11 @@ class PingEngine {
     /// - Returns: Ping result with network name
     static func pingSingleTarget(_ target: PingTarget) async -> PingResult {
         let latency = await ping(host: target.rawValue)
+        #if os(macOS)
         let networkName = NetworkInfo.getCurrentSSID()
+        #else
+        let networkName: String? = nil
+        #endif
         return PingResult(target: target.rawValue, latency: latency, networkName: networkName)
     }
 
@@ -118,8 +122,12 @@ class PingEngine {
             return (target.rawValue, latency)
         }
 
-        // Get current network name
+        // Get current network name (macOS only)
+        #if os(macOS)
         let networkName = NetworkInfo.getCurrentSSID()
+        #else
+        let networkName: String? = nil
+        #endif
 
         if let fastest = successful.min(by: { $0.1 < $1.1 }) {
             return PingResult(target: fastest.0, latency: fastest.1, networkName: networkName)
