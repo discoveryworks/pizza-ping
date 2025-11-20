@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 /// Manages network status monitoring and UI state
 @MainActor
@@ -122,8 +123,10 @@ class StatusViewModel: ObservableObject {
         lastPingTime = result.timestamp
         pingHistory.append(result)
 
-        // Log to history file
+        // Log to history file (macOS only)
+        #if os(macOS)
         HistoryLogger.shared.log(result)
+        #endif
 
         // Keep only last 100 results in memory
         if pingHistory.count > 100 {
