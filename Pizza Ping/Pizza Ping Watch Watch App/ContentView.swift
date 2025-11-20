@@ -14,42 +14,48 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Top section: Current status (long-pressable)
-            VStack(spacing: 4) {
-                // Pizza + Status emoji
-                HStack(spacing: 4) {
-                    Text("🍕")
-                        .font(.system(size: 24))
-                    Text(viewModel.statusEmoji)
-                        .font(.system(size: 24))
-                }
-
-                // Latency
-                Text(viewModel.latencyString)
-                    .font(.system(.title3, design: .monospaced))
-                    .fontWeight(.semibold)
-
-                // Time
-                if let lastPing = viewModel.lastPingTime {
-                    Text(lastPing, format: .dateTime.hour().minute())
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
-
-                // Server and Network (if available)
-                VStack(spacing: 2) {
-                    Text(viewModel.serverName)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                    if let networkName = viewModel.currentNetworkName {
-                        Text(networkName)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
+            VStack(spacing: 6) {
+                // Top row: Hero pizza/status + Stats
+                HStack(alignment: .top, spacing: 8) {
+                    // Left: Large pizza + status (quarter screen)
+                    HStack(spacing: 2) {
+                        Text("🍕")
+                            .font(.system(size: 40))
+                        Text(viewModel.statusEmoji)
+                            .font(.system(size: 40))
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    // Right: Stats (three monospace lines)
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(viewModel.latencyString)
+                            .font(.system(.body, design: .monospaced))
+                            .fontWeight(.semibold)
+
+                        if let lastPing = viewModel.lastPingTime {
+                            Text(lastPing, format: .dateTime.hour().minute())
+                                .font(.system(.caption, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                        }
+
+                        Text(viewModel.serverName)
+                            .font(.system(.caption, design: .monospaced))
+                            .foregroundStyle(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+
+                // Bottom row: Network name (full width)
+                if let networkName = viewModel.currentNetworkName {
+                    Text(networkName)
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
+            .padding(8)
             .background(isPressing ? Color.gray.opacity(0.3) : Color.clear)
             .overlay(
                 isPressing ?

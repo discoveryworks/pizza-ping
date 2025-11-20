@@ -6,12 +6,17 @@
 //
 
 import Foundation
+#if os(macOS)
 import SystemConfiguration.CaptiveNetwork
 import CoreWLAN
 import CoreLocation
+#elseif os(iOS) || os(watchOS)
+import NetworkExtension
+#endif
 
 /// Helper to get current network information
 class NetworkInfo {
+    #if os(macOS)
     private static let locationManager = CLLocationManager()
     private static var hasRequestedPermission = false
 
@@ -22,9 +27,21 @@ class NetworkInfo {
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    #endif
 
     /// Get the current WiFi network name (SSID)
     static func getCurrentSSID() -> String? {
+        #if os(macOS)
+        return getMacOSSSID()
+        #elseif os(iOS) || os(watchOS)
+        return getiOSWatchOSSSID()
+        #else
+        return nil
+        #endif
+    }
+
+    #if os(macOS)
+    private static func getMacOSSSID() -> String? {
         // Request permission if not done yet
         requestLocationPermission()
 
@@ -46,11 +63,31 @@ class NetworkInfo {
         guard let ssid = interface.ssid() else {
             print("DEBUG: interface.ssid() returned nil")
             print("DEBUG: Location auth status: \(status.rawValue)")
-            print("DEBUG: If status is not 'authorized', go to System Settings → Privacy & Security → Location Services")
             return nil
         }
 
         print("DEBUG: Successfully got SSID: \(ssid)")
         return ssid
     }
+    #endif
+
+    #if os(iOS) || os(watchOS)
+    private static func getiOSWatchOSSSID() -> String? {
+        // Use NEHotspotNetwork for iOS/watchOS
+        guard let interfaces = CNCopySupportedInterfaces() as? [String],
+              let interface = interfaces.first else {
+            print("DEBUG: No WiFi interfaces found")
+            return nil
+        }
+
+        guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any],
+              let ssid = info[kCNNetworkInfoKeySSID as String] as? String else {
+            print("DEBUG: Could not get SSID from interface")
+            return nil
+        }
+
+        print("DEBUG: Successfully got SSID: \(ssid)")
+        return ssid
+    }
+    #endif
 }
