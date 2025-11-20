@@ -18,7 +18,7 @@ struct ContentView: View {
                 // Top row: Hero pizza/status + Stats
                 HStack(alignment: .top, spacing: 8) {
                     // Left: Large pizza + status (quarter screen)
-                    HStack(spacing: 2) {
+                    HStack(spacing: 0) {
                         Text("🍕")
                             .font(.system(size: 40))
                         Text(viewModel.statusEmoji)
@@ -39,7 +39,7 @@ struct ContentView: View {
                         }
 
                         Text(viewModel.serverName)
-                            .font(.system(.caption, design: .monospaced))
+                            .font(.system(.caption2, design: .monospaced))
                             .foregroundStyle(.secondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
