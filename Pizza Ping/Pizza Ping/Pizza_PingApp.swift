@@ -19,8 +19,21 @@ struct Pizza_PingApp: App {
             ContentView()
                 .environmentObject(statusViewModel)
         } label: {
-            Text("🍕\(statusViewModel.statusEmoji)")
+            Image(statusImage)
+                .resizable()
+                .renderingMode(.template)
+                .scaledToFit()
+                .frame(width: 18, height: 18)
         }
         .menuBarExtraStyle(.window)
+    }
+
+    private var statusImage: String {
+        switch statusViewModel.currentStatus {
+        case .excellent, .good: return "PizzaGreen"
+        case .slow: return "PizzaAmber"
+        case .poor: return "PizzaRed"
+        case .disconnected: return "PizzaNo"
+        }
     }
 }

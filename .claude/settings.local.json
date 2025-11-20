@@ -9,7 +9,12 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
       "Bash(gh repo view:*)",
-      "Bash(gh repo edit:*)"
+      "Bash(gh repo edit:*)",
+      "Bash(brew install:*)",
+      "Bash(log show:*)",
+      "Bash(open -a Console)",
+      "Bash(pkill:*)",
+      "Bash(open:*)"
     ],
     "deny": [],
     "ask": []
