@@ -16,16 +16,16 @@ struct ContentView: View {
             // Top section: Current status (long-pressable)
             VStack(spacing: 6) {
                 // Top row: Hero pizza/status + Stats
-                HStack(alignment: .top, spacing: 8) {
-                    // Left: Large pizza + status image (quarter screen)
+                HStack(alignment: .center, spacing: 6) {
+                    // Left: Pizza + status image (1/3 of screen)
                     Image(statusImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 60, height: 60)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .layoutPriority(1)
 
-                    // Right: Stats (three monospace lines)
-                    VStack(alignment: .trailing, spacing: 2) {
+                    // Right: Stats (2/3 of screen, left-justified)
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(viewModel.latencyString)
                             .font(.system(.body, design: .monospaced))
                             .fontWeight(.semibold)
@@ -40,7 +40,7 @@ struct ContentView: View {
                             .font(.system(.caption2, design: .monospaced))
                             .foregroundStyle(.secondary)
                     }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(maxWidth: .infinity * 2, alignment: .leading)
                 }
 
                 // Bottom row: Network name (full width)
