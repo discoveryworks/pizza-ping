@@ -17,14 +17,12 @@ struct ContentView: View {
             VStack(spacing: 6) {
                 // Top row: Hero pizza/status + Stats
                 HStack(alignment: .top, spacing: 8) {
-                    // Left: Large pizza + status (quarter screen)
-                    HStack(spacing: 0) {
-                        Text("🍕")
-                            .font(.system(size: 40))
-                        Text(viewModel.statusEmoji)
-                            .font(.system(size: 40))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    // Left: Large pizza + status image (quarter screen)
+                    Image(statusImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60, height: 60)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Right: Stats (three monospace lines)
                     VStack(alignment: .trailing, spacing: 2) {
@@ -85,6 +83,15 @@ struct ContentView: View {
                 PingHistoryGrid(pingHistory: viewModel.pingHistory)
                     .padding(.vertical, 8)
             }
+        }
+    }
+
+    private var statusImage: String {
+        switch viewModel.currentStatus {
+        case .excellent, .good: return "PizzaGreen"
+        case .slow: return "PizzaAmber"
+        case .poor: return "PizzaRed"
+        case .disconnected: return "PizzaNo"
         }
     }
 }
