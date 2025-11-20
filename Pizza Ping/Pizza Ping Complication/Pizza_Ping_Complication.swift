@@ -47,24 +47,17 @@ struct Pizza_Ping_ComplicationEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        HStack(spacing: 2) {
-            Text("🍕")
-                .font(.system(size: 16))
-            Text(statusEmoji)
-                .font(.system(size: 16))
-            if let latency = entry.latency {
-                Text(String(format: "%.0fms", latency * 1000))
-                    .font(.system(size: 12, design: .monospaced))
-            }
-        }
+        Image(statusImage)
+            .resizable()
+            .scaledToFit()
     }
 
-    private var statusEmoji: String {
+    private var statusImage: String {
         switch entry.status {
-        case .excellent, .good: return "🟢"
-        case .slow: return "🟡"
-        case .poor: return "🔴"
-        case .disconnected: return "🚫"
+        case .excellent, .good: return "PizzaGreen"
+        case .slow: return "PizzaAmber"
+        case .poor: return "PizzaRed"
+        case .disconnected: return "PizzaNo"
         }
     }
 }
