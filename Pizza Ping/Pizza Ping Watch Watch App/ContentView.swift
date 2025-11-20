@@ -17,14 +17,13 @@ struct ContentView: View {
             VStack(spacing: 6) {
                 // Top row: Hero pizza/status + Stats
                 HStack(alignment: .center, spacing: 6) {
-                    // Left: Pizza + status image (1/3 of screen)
+                    // Left: Pizza + status image (fixed width for 1/3)
                     Image(statusImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .layoutPriority(1)
+                        .frame(width: 50, height: 50)
 
-                    // Right: Stats (2/3 of screen, left-justified)
+                    // Right: Stats (left-justified)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(viewModel.latencyString)
                             .font(.system(.body, design: .monospaced))
@@ -40,7 +39,7 @@ struct ContentView: View {
                             .font(.system(.caption2, design: .monospaced))
                             .foregroundStyle(.secondary)
                     }
-                    .frame(maxWidth: .infinity * 2, alignment: .leading)
+                    Spacer()
                 }
 
                 // Bottom row: Network name (full width)
