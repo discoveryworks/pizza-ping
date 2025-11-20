@@ -90,6 +90,11 @@ class StatusViewModel: ObservableObject {
         return currentTarget.isEmpty ? "Unknown" : currentTarget
     }
 
+    /// Current network name (from most recent ping)
+    var currentNetworkName: String? {
+        pingHistory.last?.networkName
+    }
+
     /// Start periodic background pinging
     func startPeriodicPinging() {
         pingTimer?.invalidate()

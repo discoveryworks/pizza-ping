@@ -9,46 +9,151 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = StatusViewModel()
+    @State private var isPressing = false
 
     var body: some View {
-        VStack(spacing: 8) {
-            // Large status indicator
-            Text(viewModel.statusEmoji)
-                .font(.system(size: 60))
+        VStack(spacing: 0) {
+            // Top section: Current status (long-pressable)
+            VStack(spacing: 4) {
+                // Pizza + Status emoji
+                HStack(spacing: 4) {
+                    Text("🍕")
+                        .font(.system(size: 24))
+                    Text(viewModel.statusEmoji)
+                        .font(.system(size: 24))
+                }
 
-            // Status text
-            Text(viewModel.currentStatus.description)
-                .font(.headline)
+                // Latency
+                Text(viewModel.latencyString)
+                    .font(.system(.title3, design: .monospaced))
+                    .fontWeight(.semibold)
 
-            // Latency
-            Text(viewModel.latencyString)
-                .font(.system(.title3, design: .monospaced))
-                .foregroundStyle(.secondary)
+                // Time
+                if let lastPing = viewModel.lastPingTime {
+                    Text(lastPing, format: .dateTime.hour().minute())
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
 
-            // Last check time
-            if let lastPing = viewModel.lastPingTime {
-                Text(lastPing, style: .relative)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                // Server and Network (if available)
+                VStack(spacing: 2) {
+                    Text(viewModel.serverName)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                    if let networkName = viewModel.currentNetworkName {
+                        Text(networkName)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
             }
-
-            Spacer()
-
-            // Ping button
-            Button {
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(isPressing ? Color.gray.opacity(0.3) : Color.clear)
+            .overlay(
+                isPressing ?
+                    Text("Release to ping...")
+                        .font(.caption2)
+                        .foregroundStyle(.white)
+                        .padding(4)
+                        .background(Color.black.opacity(0.7))
+                        .cornerRadius(4)
+                        .transition(.opacity)
+                    : nil
+            )
+            .onLongPressGesture(minimumDuration: 1.5, pressing: { pressing in
+                withAnimation {
+                    isPressing = pressing
+                }
+            }, perform: {
                 Task {
                     await viewModel.performPing()
                 }
-            } label: {
-                if viewModel.isPinging {
-                    ProgressView()
-                } else {
-                    Text("Ping Now")
+            })
+
+            Divider()
+
+            // Bottom section: Scrollable ping history
+            ScrollView {
+                PingHistoryGrid(pingHistory: viewModel.pingHistory)
+                    .padding(.vertical, 8)
+            }
+        }
+    }
+}
+
+// Grid showing ping history with time markers
+struct PingHistoryGrid: View {
+    let pingHistory: [PingResult]
+
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 20), spacing: 4)], spacing: 4) {
+            ForEach(Array(historyWithMarkers.enumerated()), id: \.offset) { _, item in
+                switch item {
+                case .clock(let emoji):
+                    Text(emoji)
+                        .font(.caption2)
+                case .status(let emoji):
+                    Text(emoji)
+                        .font(.caption)
                 }
             }
-            .disabled(viewModel.isPinging)
         }
-        .padding()
+        .padding(.horizontal, 4)
+    }
+
+    enum HistoryItem {
+        case status(String)
+        case clock(String)
+    }
+
+    private var historyWithMarkers: [HistoryItem] {
+        var items: [HistoryItem] = []
+        var lastHourMarker: Int?
+
+        for result in pingHistory.reversed() {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.hour, .minute], from: result.timestamp)
+            let hour = components.hour ?? 0
+            let minute = components.minute ?? 0
+
+            // Add clock marker every 30 minutes (on the hour and half hour)
+            if minute == 0 || minute == 30 {
+                let markerKey = hour * 100 + minute
+                if lastHourMarker != markerKey {
+                    lastHourMarker = markerKey
+                    items.append(.clock(clockEmoji(hour: hour, minute: minute)))
+                }
+            }
+
+            // Add status emoji
+            let status = NetworkStatus(latency: result.latency)
+            let emoji: String
+            switch status {
+            case .excellent, .good: emoji = "🟢"
+            case .slow: emoji = "🟡"
+            case .poor: emoji = "🔴"
+            case .disconnected: emoji = "🚫"
+            }
+            items.append(.status(emoji))
+        }
+
+        return items
+    }
+
+    private func clockEmoji(hour: Int, minute: Int) -> String {
+        // Clock emoji based on hour (🕐-🕧)
+        let baseHour = hour % 12
+        if minute == 0 {
+            // On the hour: 🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛
+            let clocks = ["🕛", "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚"]
+            return clocks[baseHour]
+        } else {
+            // Half hour: 🕜🕝🕞🕟🕠🕡🕢🕣🕤🕥🕦🕧
+            let clocks = ["🕧", "🕜", "🕝", "🕞", "🕟", "🕠", "🕡", "🕢", "🕣", "🕤", "🕥", "🕦"]
+            return clocks[baseHour]
+        }
     }
 }
 
