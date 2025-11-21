@@ -25,12 +25,8 @@ struct Pizza_PingApp: App {
             ContentView()
                 .environmentObject(statusViewModel)
         } label: {
-            if let nsImage = NSImage(named: statusImage) {
-                Image(nsImage: nsImage)
-            } else {
-                // Fallback to emoji if image not found
-                Text("🍕\(statusViewModel.statusEmoji)")
-            }
+            // Use emoji for now - images need to be resized for menu bar
+            Text("🍕\(statusViewModel.statusEmoji)")
         }
         .menuBarExtraStyle(.window)
     }
