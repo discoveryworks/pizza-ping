@@ -20,10 +20,7 @@ struct Pizza_PingApp: App {
                 .environmentObject(statusViewModel)
         } label: {
             Image(statusImage)
-                .resizable()
-                .renderingMode(.template)
-                .scaledToFit()
-                .frame(width: 18, height: 18)
+                .renderingMode(.original)
         }
         .menuBarExtraStyle(.window)
     }

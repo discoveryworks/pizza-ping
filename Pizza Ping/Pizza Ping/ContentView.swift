@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Pizza Ping
 //
-//  Created by Jonathan Berger on 11/18/25.
+//  Created I uninstalled the Homebrew version, and am trying to run the Xcode version, and see nothing in my menu bar. by Jonathan Berger on 11/18/25.
 //
 
 import SwiftUI

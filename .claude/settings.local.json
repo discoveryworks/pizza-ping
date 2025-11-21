@@ -14,7 +14,8 @@
       "Bash(log show:*)",
       "Bash(open -a Console)",
       "Bash(pkill:*)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "mcp__private-journal__process_thoughts"
     ],
     "deny": [],
     "ask": []
