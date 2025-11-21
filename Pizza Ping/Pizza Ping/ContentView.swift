@@ -133,9 +133,33 @@ struct ContentView: View {
                 }
                 .keyboardShortcut("q")
             }
+
+            Divider()
+
+            // Footer
+            VStack(spacing: 4) {
+                Button {
+                    if let url = URL(string: "https://discovery.works/labs/pizza/") {
+                        NSWorkspace.shared.open(url)
+                    }
+                } label: {
+                    Text("discovery.works/labs/pizza")
+                        .font(.caption2)
+                        .foregroundStyle(.blue)
+                }
+                .buttonStyle(.plain)
+
+                Text("v\(appVersion)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding()
         .frame(width: 320)
+    }
+
+    private var appVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     }
 }
 
