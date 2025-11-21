@@ -25,8 +25,14 @@ struct Pizza_PingApp: App {
             ContentView()
                 .environmentObject(statusViewModel)
         } label: {
-            // Use emoji for now - images need to be resized for menu bar
-            Text("🍕\(statusViewModel.statusEmoji)")
+            if let nsImage = NSImage(named: statusImage) {
+                Image(nsImage: nsImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18)
+            } else {
+                Text("🍕\(statusViewModel.statusEmoji)")
+            }
         }
         .menuBarExtraStyle(.window)
     }
