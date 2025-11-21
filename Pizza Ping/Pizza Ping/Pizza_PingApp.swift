@@ -14,7 +14,13 @@ struct Pizza_PingApp: App {
     // Toggle between dot and pepperoni styles
     private let usePepperoniStyle = false
 
+    init() {
+        print("DEBUG: Pizza_PingApp init")
+    }
+
     var body: some Scene {
+        print("DEBUG: Creating MenuBarExtra with image: \(statusImage)")
+        return
         MenuBarExtra {
             ContentView()
                 .environmentObject(statusViewModel)
