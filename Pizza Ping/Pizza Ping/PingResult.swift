@@ -45,9 +45,9 @@ enum NetworkStatus: String {
         switch latency {
         case 0..<0.05:
             self = .excellent
-        case 0.05..<0.15:
+        case 0.05..<0.1:
             self = .good
-        case 0.15..<0.3:
+        case 0.1..<0.15:
             self = .slow
         default:
             self = .poor
