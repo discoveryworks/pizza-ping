@@ -26,12 +26,14 @@ struct Pizza_PingApp: App {
                 .environmentObject(statusViewModel)
         } label: {
             if let nsImage = NSImage(named: statusImage) {
-                Image(nsImage: nsImage)
+                let coloredImage = nsImage
+                coloredImage.isTemplate = false
+                return AnyView(Image(nsImage: coloredImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 18, height: 18)
+                    .frame(width: 18, height: 18))
             } else {
-                Text("🍕\(statusViewModel.statusEmoji)")
+                return AnyView(Text("🍕\(statusViewModel.statusEmoji)"))
             }
         }
         .menuBarExtraStyle(.window)
