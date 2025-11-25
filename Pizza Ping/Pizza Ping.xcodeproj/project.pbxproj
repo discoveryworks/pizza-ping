@@ -191,6 +191,23 @@
 			);
 			target = ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */;
 		};
+		ECB4B5702ED55B8600E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				NetworkInfo.swift,
+				PingEngine.swift,
+				PingResult.swift,
+				StatusViewModel.swift,
+			);
+			target = ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */;
+		};
+		ECB4B5752ED55BCE00E5F463 /* Exceptions for "Pizza Ping iOS" folder in "Pizza Ping WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SharedPingData.swift,
+			);
+			target = ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */;
+		};
 		ECF9BD2A2ECE4B2400837370 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Lite" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -212,6 +229,7 @@
 				ECB4B32A2ECF56B900E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping iOS" target */,
 				ECB4B32B2ECF56B900E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Watch Watch App" target */,
 				ECB4B3E12ECF740200E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping ComplicationExtension" target */,
+				ECB4B5702ED55B8600E5F463 /* Exceptions for "Pizza Ping" folder in "Pizza Ping WidgetExtension" target */,
 			);
 			path = "Pizza Ping";
 			sourceTree = "<group>";
@@ -262,6 +280,9 @@
 		};
 		ECF9BDE52ECF515000837370 /* Pizza Ping iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ECB4B5752ED55BCE00E5F463 /* Exceptions for "Pizza Ping iOS" folder in "Pizza Ping WidgetExtension" target */,
+			);
 			path = "Pizza Ping iOS";
 			sourceTree = "<group>";
 		};
