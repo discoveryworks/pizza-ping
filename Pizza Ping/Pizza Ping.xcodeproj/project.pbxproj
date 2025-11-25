@@ -11,6 +11,9 @@
 		ECB4B3CB2ECF735400E5F463 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB4B3CA2ECF735400E5F463 /* WidgetKit.framework */; };
 		ECB4B3CD2ECF735400E5F463 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB4B3CC2ECF735400E5F463 /* SwiftUI.framework */; };
 		ECB4B3DA2ECF735600E5F463 /* Pizza Ping ComplicationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECB4B3C92ECF735400E5F463 /* Pizza Ping ComplicationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ECB4B5572ED5591400E5F463 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB4B3CA2ECF735400E5F463 /* WidgetKit.framework */; };
+		ECB4B5582ED5591400E5F463 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB4B3CC2ECF735400E5F463 /* SwiftUI.framework */; };
+		ECB4B5672ED5591500E5F463 /* Pizza Ping WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECB4B5562ED5591400E5F463 /* Pizza Ping WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ECF9BCEC2ECE06CA00837370 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */; };
 		ECF9BD242ECE4B2300837370 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +61,13 @@
 			remoteGlobalIDString = ECB4B3C82ECF735400E5F463;
 			remoteInfo = "Pizza Ping ComplicationExtension";
 		};
+		ECB4B5652ED5591500E5F463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC250B672ECD286600EC1B0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECB4B5552ED5591400E5F463;
+			remoteInfo = "Pizza Ping WidgetExtension";
+		};
 		ECF9BDF42ECF515200837370 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC250B672ECD286600EC1B0D /* Project object */;
@@ -97,6 +107,17 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECB4B5682ED5591500E5F463 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				ECB4B5672ED5591500E5F463 /* Pizza Ping WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +131,7 @@
 		ECB4B3C92ECF735400E5F463 /* Pizza Ping ComplicationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pizza Ping ComplicationExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB4B3CA2ECF735400E5F463 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		ECB4B3CC2ECF735400E5F463 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		ECB4B5562ED5591400E5F463 /* Pizza Ping WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pizza Ping WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECF9BCEB2ECE06CA00837370 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
 		ECF9BD292ECE4B2300837370 /* Pizza Ping Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Ping Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECF9BDE42ECF515000837370 /* Pizza Ping iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Ping iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +183,13 @@
 				SharedPingData.swift,
 			);
 			target = ECB4B3C82ECF735400E5F463 /* Pizza Ping ComplicationExtension */;
+		};
+		ECB4B56C2ED5591500E5F463 /* Exceptions for "Pizza Ping Widget" folder in "Pizza Ping WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */;
 		};
 		ECF9BD2A2ECE4B2400837370 /* Exceptions for "Pizza Ping" folder in "Pizza Ping Lite" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -221,6 +250,14 @@
 				ECB4B3DE2ECF735600E5F463 /* Exceptions for "Pizza Ping Complication" folder in "Pizza Ping ComplicationExtension" target */,
 			);
 			path = "Pizza Ping Complication";
+			sourceTree = "<group>";
+		};
+		ECB4B5592ED5591400E5F463 /* Pizza Ping Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ECB4B56C2ED5591500E5F463 /* Exceptions for "Pizza Ping Widget" folder in "Pizza Ping WidgetExtension" target */,
+			);
+			path = "Pizza Ping Widget";
 			sourceTree = "<group>";
 		};
 		ECF9BDE52ECF515000837370 /* Pizza Ping iOS */ = {
@@ -293,6 +330,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECB4B5532ED5591400E5F463 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB4B5582ED5591400E5F463 /* SwiftUI.framework in Frameworks */,
+				ECB4B5572ED5591400E5F463 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECF9BD232ECE4B2300837370 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -338,6 +384,7 @@
 				ECB4B30B2ECF547200E5F463 /* Pizza Ping Watch Watch AppTests */,
 				ECB4B3152ECF547200E5F463 /* Pizza Ping Watch Watch AppUITests */,
 				ECB4B3CE2ECF735400E5F463 /* Pizza Ping Complication */,
+				ECB4B5592ED5591400E5F463 /* Pizza Ping Widget */,
 				ECF9BCEA2ECE06CA00837370 /* Frameworks */,
 				EC250B702ECD286600EC1B0D /* Products */,
 			);
@@ -358,6 +405,7 @@
 				ECB4B3082ECF547200E5F463 /* Pizza Ping Watch Watch AppTests.xctest */,
 				ECB4B3122ECF547200E5F463 /* Pizza Ping Watch Watch AppUITests.xctest */,
 				ECB4B3C92ECF735400E5F463 /* Pizza Ping ComplicationExtension.appex */,
+				ECB4B5562ED5591400E5F463 /* Pizza Ping WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -554,6 +602,28 @@
 			productReference = ECB4B3C92ECF735400E5F463 /* Pizza Ping ComplicationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECB4B56B2ED5591500E5F463 /* Build configuration list for PBXNativeTarget "Pizza Ping WidgetExtension" */;
+			buildPhases = (
+				ECB4B5522ED5591400E5F463 /* Sources */,
+				ECB4B5532ED5591400E5F463 /* Frameworks */,
+				ECB4B5542ED5591400E5F463 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ECB4B5592ED5591400E5F463 /* Pizza Ping Widget */,
+			);
+			name = "Pizza Ping WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "Pizza Ping WidgetExtension";
+			productReference = ECB4B5562ED5591400E5F463 /* Pizza Ping WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		ECF9BD212ECE4B2300837370 /* Pizza Ping Lite */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECF9BD262ECE4B2300837370 /* Build configuration list for PBXNativeTarget "Pizza Ping Lite" */;
@@ -583,10 +653,12 @@
 				ECF9BDE02ECF515000837370 /* Sources */,
 				ECF9BDE12ECF515000837370 /* Frameworks */,
 				ECF9BDE22ECF515000837370 /* Resources */,
+				ECB4B5682ED5591500E5F463 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ECB4B5662ED5591500E5F463 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				ECF9BDE52ECF515000837370 /* Pizza Ping iOS */,
@@ -682,6 +754,9 @@
 					ECB4B3C82ECF735400E5F463 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
+					ECB4B5552ED5591400E5F463 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
 					ECF9BDE32ECF515000837370 = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -721,6 +796,7 @@
 				ECB4B3072ECF547200E5F463 /* Pizza Ping Watch Watch AppTests */,
 				ECB4B3112ECF547200E5F463 /* Pizza Ping Watch Watch AppUITests */,
 				ECB4B3C82ECF735400E5F463 /* Pizza Ping ComplicationExtension */,
+				ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -776,6 +852,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		ECB4B3C72ECF735400E5F463 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB4B5542ED5591400E5F463 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -862,6 +945,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECB4B5522ED5591400E5F463 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECF9BD222ECE4B2300837370 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -922,6 +1012,11 @@
 			isa = PBXTargetDependency;
 			target = ECB4B3C82ECF735400E5F463 /* Pizza Ping ComplicationExtension */;
 			targetProxy = ECB4B3D82ECF735600E5F463 /* PBXContainerItemProxy */;
+		};
+		ECB4B5662ED5591500E5F463 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECB4B5552ED5591400E5F463 /* Pizza Ping WidgetExtension */;
+			targetProxy = ECB4B5652ED5591500E5F463 /* PBXContainerItemProxy */;
 		};
 		ECF9BDF52ECF515200837370 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1445,6 +1540,71 @@
 			};
 			name = Release;
 		};
+		ECB4B5692ED5591500E5F463 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R9W29S78JH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pizza Ping Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pizza Ping Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping-iOS.Pizza-Ping-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ECB4B56A2ED5591500E5F463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R9W29S78JH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pizza Ping Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pizza Ping Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "works.discovery.Pizza-Ping-iOS.Pizza-Ping-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		ECF9BD272ECE4B2300837370 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1728,6 +1888,15 @@
 			buildConfigurations = (
 				ECB4B3DC2ECF735600E5F463 /* Debug */,
 				ECB4B3DD2ECF735600E5F463 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECB4B56B2ED5591500E5F463 /* Build configuration list for PBXNativeTarget "Pizza Ping WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECB4B5692ED5591500E5F463 /* Debug */,
+				ECB4B56A2ED5591500E5F463 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

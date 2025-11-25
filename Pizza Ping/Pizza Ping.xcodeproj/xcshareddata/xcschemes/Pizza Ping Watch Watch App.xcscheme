@@ -43,6 +43,30 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ECB4B3112ECF547200E5F463"
+               BuildableName = "Pizza Ping Watch Watch AppUITests.xctest"
+               BlueprintName = "Pizza Ping Watch Watch AppUITests"
+               ReferencedContainer = "container:Pizza Ping.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ECB4B3072ECF547200E5F463"
+               BuildableName = "Pizza Ping Watch Watch AppTests.xctest"
+               BlueprintName = "Pizza Ping Watch Watch AppTests"
+               ReferencedContainer = "container:Pizza Ping.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
