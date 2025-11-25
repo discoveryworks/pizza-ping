@@ -1,8 +1,29 @@
-# Pizza Ping
+🌌 Why did we create Pizza Ping?
+====================================
 
-Network latency monitor. (But with more pizza.)
+Because you deserve to know if your network sucks. (But with more pizza.)
+
+
+🌌🌌 Who benefits from Pizza Ping?
+====================================
+
+Anyone who needs reliable network monitoring:
+- Remote workers troubleshooting video calls
+- Gamers checking connection quality
+- Developers debugging network issues
+- Anyone who wants glanceable network status
+
+
+🌌🌌🌌 What does Pizza Ping do?
+====================================
 
 A clean, ad-free network monitoring tool that lives in your menu bar (macOS), on your wrist (Apple Watch), and in your pocket (iOS). Shows current latency with a pizza emoji and colored status indicator.
+
+Automatically pings public DNS servers (Google, Cloudflare, Quad9) every 5 minutes and gives you instant visual feedback on your network quality.
+
+
+🌌🌌🌌🌌 How do I use it?
+====================================
 
 ## Installation
 
@@ -62,17 +83,18 @@ Pizza Ping:
 
 See full [Privacy Policy](https://discovery.works/privacy/)
 
+🌌🌌🌌🌌🌌 Extras
+====================================
+
 ## Development
 
 Built with Swift/SwiftUI. Free and open source.
 
-### Two Build Variants
+**Two Build Variants:**
+- Pizza Ping: Full-featured (Homebrew distribution)
+- Pizza Ping Lite: App Store version (sandboxed)
 
-- **Pizza Ping:** Full-featured (Homebrew distribution)
-- **Pizza Ping Lite:** App Store version (sandboxed)
-
-### Tech Stack
-
+**Tech Stack:**
 - Swift/SwiftUI for all platforms
 - Network.framework for TCP latency testing
 - CoreWLAN (macOS) / NetworkExtension (iOS/watchOS) for WiFi info
