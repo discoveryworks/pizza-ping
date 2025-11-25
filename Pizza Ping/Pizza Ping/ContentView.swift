@@ -137,7 +137,7 @@ struct ContentView: View {
             Divider()
 
             // Footer
-            VStack(spacing: 4) {
+            HStack {
                 Button {
                     if let url = URL(string: "https://discovery.works/labs/pizza/") {
                         NSWorkspace.shared.open(url)
@@ -148,6 +148,8 @@ struct ContentView: View {
                         .foregroundStyle(.blue)
                 }
                 .buttonStyle(.plain)
+
+                Spacer()
 
                 Text("v\(appVersion)")
                     .font(.caption2)
